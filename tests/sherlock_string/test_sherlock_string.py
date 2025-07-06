@@ -1,4 +1,3 @@
-import pytest
 from problems.sherlock_string.sherlock_string import sherlock_string
 
 
