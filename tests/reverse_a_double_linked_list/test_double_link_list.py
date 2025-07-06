@@ -36,6 +36,12 @@ def test_reverse_double_linked_list_in_place():
     assert double_linked_list.head.next.value == 4
     assert double_linked_list.tail.prev.value == 2
 
+def test_reverse_empty_double_linked_list_should_work():
+    double_linked_list = DoubleLinkedList([])
+    reversed_linked_list = double_linked_list.reverse(in_place=False)
+    assert reversed_linked_list.to_list() == []
+    assert double_linked_list.to_list() == []
+
 
 def test_insert_a_node_at_position_2_should_work():
     double_linked_list = DoubleLinkedList([1, 2, 3])
@@ -64,3 +70,10 @@ def test_clone_double_linked_list_should_work():
     assert isinstance(cloned_list, DoubleLinkedList)
     assert cloned_list.to_list() == [1, 2, 3]
     
+
+def test_clone_empty_double_linked_list_should_work():
+    double_linked_list = DoubleLinkedList([])
+    cloned_list = double_linked_list.clone()
+    assert isinstance(cloned_list, DoubleLinkedList)
+    assert cloned_list.to_list() == []
+
