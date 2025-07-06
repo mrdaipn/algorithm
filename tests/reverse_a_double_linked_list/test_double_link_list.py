@@ -57,3 +57,10 @@ def test_insert_at_position_should_raise_index_error_for_out_of_bounds():
 
     with pytest.raises(IndexError):
         double_linked_list.insert_at_position(new_node, -1)
+
+def test_clone_double_linked_list_should_work():
+    double_linked_list = DoubleLinkedList([1, 2, 3])
+    cloned_list = double_linked_list.clone()
+    assert isinstance(cloned_list, DoubleLinkedList)
+    assert cloned_list.to_list() == [1, 2, 3]
+    
