@@ -69,7 +69,20 @@ class DoubleLinkedList():
         while current:
             values.append(current.value)
             current = current.next
-        return values        
+        return values
+
+    def merge(self, other: 'DoubleLinkedList', in_place=False) -> 'DoubleLinkedList':
+        """
+        Merge another double linked list into this one.
+        """
+        if other is self:
+            raise ValueError("Cannot merge a double linked list with itself with in place mode.")
+        
+        if in_place:            
+            self.__merge_in_place(other)
+            return self
+        else:            
+            return self.__merge_clone(other)
     
     def __assign_nodes(self, values) -> None:
         """
@@ -142,5 +155,32 @@ class DoubleLinkedList():
             current_possition += 1
         
         return reversed_list
+    
+    def __merge_in_place(self, other: 'DoubleLinkedList') -> None:
+        """
+        Merge another double linked list into this one in place.
+        """
+        if not other.head:
+            return
+        
+        if not self.head:
+            self.head = other.head
+            self.tail = other.tail
+            self.__length = other.__length
+            return
+        
+        self.tail.next = other.head
+        other.head.prev = self.tail
+        self.tail = other.tail
+        self.__length += other.__length
+
+    def __merge_clone(self, other: 'DoubleLinkedList') -> 'DoubleLinkedList':
+        """
+        Merge another double linked list into this one and return a new list.
+        """
+        merged_list = DoubleLinkedList()
+        merged_list = merged_list.merge(self, in_place=True)
+        merged_list = merged_list.merge(other, in_place=True)
+        return merged_list
                 
     

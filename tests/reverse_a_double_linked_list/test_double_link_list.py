@@ -77,3 +77,75 @@ def test_clone_empty_double_linked_list_should_work():
     assert isinstance(cloned_list, DoubleLinkedList)
     assert cloned_list.to_list() == []
 
+def test_merge_2_double_linked_list__not_in_place_should_work():
+    double_linked_list1 = DoubleLinkedList([1, 2, 3])
+    double_linked_list2 = DoubleLinkedList([4, 5, 6])
+    
+    merged_list = double_linked_list1.merge(double_linked_list2)
+    assert merged_list.to_list() == [1, 2, 3, 4, 5, 6]
+    
+    assert merged_list.head.value == 1
+    assert merged_list.tail.value == 6
+    assert merged_list.head.next.value == 2
+    assert merged_list.tail.prev.value == 5
+
+def test_merge_2_double_linked_list_in_place_should_work():
+    double_linked_list1 = DoubleLinkedList([1, 2, 3])
+    double_linked_list2 = DoubleLinkedList([4, 5, 6])
+    
+    double_linked_list1.merge(double_linked_list2, in_place=True)
+    assert double_linked_list1.to_list() == [1, 2, 3, 4, 5, 6]
+    
+    assert double_linked_list1.head.value == 1
+    assert double_linked_list1.tail.value == 6
+    assert double_linked_list1.head.next.value == 2
+    assert double_linked_list1.tail.prev.value == 5
+
+def test_merge_empty_double_linked_list_should_work():
+    double_linked_list1 = DoubleLinkedList([1, 2, 3])
+    double_linked_list2 = DoubleLinkedList([])
+    
+    merged_list = double_linked_list1.merge(double_linked_list2)
+    assert merged_list.to_list() == [1, 2, 3]
+    
+    assert merged_list.head.value == 1
+    assert merged_list.tail.value == 3
+    assert merged_list.head.next.value == 2
+    assert merged_list.tail.prev.value == 2
+
+def test_merge_empty_double_linked_list_in_place_should_work():
+    double_linked_list1 = DoubleLinkedList([1, 2, 3])
+    double_linked_list2 = DoubleLinkedList([])
+    
+    double_linked_list1.merge(double_linked_list2, in_place=True)
+    assert double_linked_list1.to_list() == [1, 2, 3]
+    
+    assert double_linked_list1.head.value == 1
+    assert double_linked_list1.tail.value == 3
+    assert double_linked_list1.head.next.value == 2
+    assert double_linked_list1.tail.prev.value == 2
+
+def test_merge_2_empty_double_linked_list_should_work():
+    double_linked_list1 = DoubleLinkedList([])
+    double_linked_list2 = DoubleLinkedList([])
+    
+    merged_list = double_linked_list1.merge(double_linked_list2)
+    assert merged_list.to_list() == []
+    
+    assert merged_list.head is None
+    assert merged_list.tail is None
+
+def test_merge_2_empty_double_linked_list_in_place_should_work():
+    double_linked_list1 = DoubleLinkedList([])
+    double_linked_list2 = DoubleLinkedList([])
+    
+    double_linked_list1.merge(double_linked_list2, in_place=True)
+    assert double_linked_list1.to_list() == []
+    
+    assert double_linked_list1.head is None
+    assert double_linked_list1.tail is None
+
+def test_merge_double_linked_list_with_self_should_raise_error():
+    with pytest.raises(ValueError):
+        double_linked_list = DoubleLinkedList([1, 2, 3])
+        double_linked_list.merge(double_linked_list, in_place=True)
