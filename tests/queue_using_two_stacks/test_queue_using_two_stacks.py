@@ -32,7 +32,7 @@ def test_peek_queue_should_return_the_first_item_without_removing_it(queue):
 
     p = queue.peek()
     assert p == 10
-    assert queue.length() == 2
+    assert queue.length == 2
 
 def test_peek_empty_queue_should_return_none(queue):
     p = queue.peek()

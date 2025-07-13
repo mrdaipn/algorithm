@@ -1,26 +1,28 @@
 class CubeWithTwoStacks():
     def __init__(self):
-        self.__forward_stack = []
-        self.__backward_stack = []
+        self.__stack1 = []
+        self.__stack2 = []
+        self.__length = 0
 
+    @property
+    def length(self):
+        return self.__length
+    
     def enqueue(self, value) -> None:        
-        self.__move_elements(self.__forward_stack, self.__backward_stack)
-        self.__forward_stack.append(value)
-        self.__move_elements(self.__backward_stack, self.__forward_stack)
+       self.__stack1.append(value)
+       self.__length += 1
 
     def dequeue(self) -> int:
-        if not self.__forward_stack:
-            return None
-        return self.__forward_stack.pop()
-        
+        self.__fill_stack2_if_empty()        
+        self.__length -= 1
+        return self.__stack2.pop() if self.__stack2 else None
     
-    def length(self) -> int:
-        return len(self.__forward_stack)
     
     def peek(self) -> int:
-        return self.__forward_stack[-1] if self.__forward_stack else None
+        self.__fill_stack2_if_empty()
+        return self.__stack2[-1] if self.__stack2 else None
 
-    def __move_elements(self, source, destination) -> None:
-        while source:
-            v = source.pop()
-            destination.append(v)    
+    def __fill_stack2_if_empty(self) -> None:
+        if not self.__stack2:
+            while self.__stack1:
+                self.__stack2.append(self.__stack1.pop())
