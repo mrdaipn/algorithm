@@ -2,6 +2,7 @@ class QueueWithTwoStacks:
     """
     Implement queue by using 2 stacks
     """
+
     def __init__(self):
         self.__stack1 = []
         self.__stack2 = []
@@ -10,7 +11,7 @@ class QueueWithTwoStacks:
     @property
     def length(self):
         """
-            Return the current length of the queue
+        Return the current length of the queue
         """
         return self.__length
 
