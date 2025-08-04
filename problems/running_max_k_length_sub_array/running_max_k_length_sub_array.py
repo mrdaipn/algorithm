@@ -11,12 +11,12 @@ class RuningMaxKLengthSubArray:
         result = []
         if not self.__array:
             return result
-        
+
         for window in range(0, len(self.__array) - self.__k + 1):
             max_value = self.__find_max_window_value(window)
             result.append(max_value)
 
         return result
-    
+
     def __find_max_window_value(self, window: int):
-        return max(self.__array[window: window + self.__k])
+        return max(self.__array[window : window + self.__k])

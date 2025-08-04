@@ -1,4 +1,6 @@
-from problems.running_max_k_length_sub_array.running_max_k_length_sub_array import RuningMaxKLengthSubArray
+from problems.running_max_k_length_sub_array.running_max_k_length_sub_array import (
+    RuningMaxKLengthSubArray,
+)
 
 
 class TestRunningMaxKLengthSubArray:
@@ -13,5 +15,4 @@ class TestRunningMaxKLengthSubArray:
 
     def test_running_max_with_empty_array_should_return_empty_array(self):
         runing_max_sub_array = RuningMaxKLengthSubArray(array=[], k=2)
-        assert [] ==  runing_max_sub_array.get_running_max_array()
-        
+        assert [] == runing_max_sub_array.get_running_max_array()
